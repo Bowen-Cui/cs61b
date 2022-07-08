@@ -140,14 +140,76 @@ public class Model extends Observable {
         changed = false;
 
         // TODO: Modify this.board (and perhaps this.score) to account
-        // for the tilt to the Side SIDE. If the board changed, set the
-        // changed local variable to true.
+        // change the view perspective to the given side(change the behavior of
+        // the tile and move classes so that they behave as if the given side was NORTH.)
+        board.setViewingPerspective(side);
+
+        //tilt each column of the board
+        for(int col=0; col<board.size();col++){
+            if(tiltCol(col)){
+                changed =true;
+            }
+        }
+
+        //change the view perspective back to north
+        board.setViewingPerspective(Side.NORTH);
 
         checkGameOver();
+        // for the tilt to the Side SIDE. If the board changed, set the
+        // changed local variable to true.
         if (changed) {
             setChanged();
         }
         return changed;
+    }
+    /**
+     * A helper function that processes a single column of the board
+     */
+    private boolean tiltCol(int col){
+        boolean changed;
+        changed = false;
+        boolean[] mergerow=new boolean[board.size()];
+        //check the tiles in row 2,1,0 of this column
+        for(int i=board.size()-2; i>=0;i--){
+            //if this tile is empty, jump to the next tile below
+            if(tile(col,i)==null){continue;}
+            //if this tile is not empty, move to the desired row.
+            int torow=toRow(col, i, mergerow);
+            if(torow!=i) {
+                boolean checkmerge = board.move(col, torow, tile(col, i));
+                if (checkmerge) {
+                    score += tile(col, torow).value();
+                    mergerow[torow]=true;
+                }
+                changed = true;
+            }
+        }
+        return changed;
+    }
+
+    /**
+     *A helper function that can return a desired row value
+     */
+    public int toRow(int col, int row, boolean[] mergerow){
+        int torow=row;
+        boolean merged=false;
+        //check all the tiles above it until it cannot move
+        for( int i=row; i+1<board.size();i++) {
+            //case1: the space above is empty, move up
+            if (tile(col, i+1) == null){
+                torow=i+1;
+            }
+            //case2: the values are same and has not been merged, move up and merge
+            else if(tile(col, row).value() == tile(col, i+1).value() && merged==false && mergerow[i+1]==false){
+                torow=i+1;
+                merged=true;
+            }else{
+            //case3: different value or cannot merge twice, stop moving
+                torow=i;
+                break; //debug发现此处须要break，否则继续循环向上移动
+            }
+        }
+        return torow;
     }
 
     /**
