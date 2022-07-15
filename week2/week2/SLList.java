@@ -24,6 +24,40 @@ public class SLList {
         sentinel.next=new IntNode(x,null);
         size=1;
     }
+
+    /**
+     * constructor that takes in an array of integers, and creates an SLList with those integers.
+     */
+    public SLList(int[] array){
+        sentinel=new IntNode(100,null);
+        IntNode temp=sentinel;
+        for(int i=0;i<array.length;i++){
+            temp.next=new IntNode(array[i],null);
+            size+=1;
+            temp=temp.next;
+        }
+    }
+    /**两个链表相加, 满10进位*/
+    public static SLList addTwoNumbers(SLList l1,SLList l2){
+        SLList l=new SLList();
+        int carryover=0;
+        while(l1.sentinel.next!=null || l2.sentinel.next!=null){
+            int i= carryover+l1.getFirst() + l2.getFirst();
+            if(i>9){
+                carryover = 1;
+                i=i%10;
+            }else{
+                carryover=0;
+            }
+            l.addLast(i);
+            if(l1.sentinel.next!=null) l1.sentinel.next=l1.sentinel.next.next;
+            if(l1.sentinel.next!=null) l2.sentinel.next=l2.sentinel.next.next;
+        }
+        if(carryover==1){
+            l.addLast(1);
+        }
+        return l;
+    }
     /** Adds f to the front of the List*/
     public void addFirst(int f){
         sentinel.next=new IntNode(f,sentinel.next);
@@ -32,7 +66,7 @@ public class SLList {
     /** Returns the first letter in the list*/
     public int getFirst(){
         if(sentinel.next==null){
-            System.out.println("List为空");
+            //System.out.println("List为空");
             return 0;
         }
         return sentinel.next.item;
@@ -72,6 +106,25 @@ public class SLList {
         return size;
     }
 
+    /**We want to add a method to IntList so that if 2 numbers in a row are the same, we add them together and
+     make one large node. For example:
+     1 → 1 → 2 → 3 becomes 2 → 2 → 3 which becomes 4 → 3
+     */
+    public void addAdjacent() {
+        IntNode temp=sentinel;
+        while(temp.next.next!=null){
+            int a=temp.next.item;
+            int b=temp.next.next.item;
+            if(a==b){
+                temp.next=new IntNode(a+b,temp.next.next.next);
+                size-=1;
+                continue;
+            }
+            temp=temp.next;
+        }
+
+    }
+
     public void printList(){
         if(sentinel.next==null){
             System.out.println("List为空");
@@ -85,7 +138,7 @@ public class SLList {
     }
 
     public static void main(String[] args) {
-        SLList L=new SLList(15);
+        SLList L=new SLList();
         L.addFirst(10);
         L.addFirst(5);
         L.addLast(20);
@@ -101,6 +154,26 @@ public class SLList {
         A.printList();
         System.out.println(A.size());
         System.out.println(A.getFirst());
+        System.out.println();
+
+        int[] array= {1,1,2,4,8};
+        SLList B=new SLList(array);
+        B.printList();
+        System.out.println();
+        B.addAdjacent();
+        System.out.println(B.size());
+        B.printList();
+        System.out.println();
+        System.out.println();
+
+        int[] array1= {2,4,3,1};
+        int[] array2= {5,6,7};
+        SLList L1=new SLList(array1);
+        SLList L2=new SLList(array2);
+        SLList sum = addTwoNumbers(L1,L2);
+        sum.printList();
+
+
 
     }
 }
