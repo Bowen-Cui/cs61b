@@ -37,12 +37,14 @@ public class SLList {
             temp=temp.next;
         }
     }
-    /**两个链表相加, 满10进位*/
+    /**LEETCODE : 两个链表相加, 满10进位*/
     public static SLList addTwoNumbers(SLList l1,SLList l2){
         SLList l=new SLList();
+        SLList s1=l1;
+        SLList s2=l2;
         int carryover=0;
-        while(l1.sentinel.next!=null || l2.sentinel.next!=null){
-            int i= carryover+l1.getFirst() + l2.getFirst();
+        while(s1.sentinel.next!=null || s2.sentinel.next!=null){
+            int i= carryover+s1.getFirst() + s2.getFirst();
             if(i>9){
                 carryover = 1;
                 i=i%10;
@@ -50,8 +52,8 @@ public class SLList {
                 carryover=0;
             }
             l.addLast(i);
-            if(l1.sentinel.next!=null) l1.sentinel.next=l1.sentinel.next.next;
-            if(l1.sentinel.next!=null) l2.sentinel.next=l2.sentinel.next.next;
+            if(s1.sentinel.next!=null) s1.sentinel.next=s1.sentinel.next.next;
+            if(s1.sentinel.next!=null) s2.sentinel.next=s2.sentinel.next.next;
         }
         if(carryover==1){
             l.addLast(1);
@@ -125,6 +127,24 @@ public class SLList {
 
     }
 
+    /**
+     * the methods findFirst and findFirstHelper below return the
+     * index of the first Node with item n, or -1 if there is no such node containing that item.
+     */
+    public int findFirst(int n){
+        return findFirstHelper(n,0 , sentinel.next);
+    }
+    public int findFirstHelper(int n, int index, IntNode curr ){
+        if(curr==null){
+            return -1;
+        }
+        if (curr.item==n){
+            return index;
+        }else{
+            return findFirstHelper(n,index+1,curr.next);
+        }
+    }
+
     public void printList(){
         if(sentinel.next==null){
             System.out.println("List为空");
@@ -147,7 +167,7 @@ public class SLList {
         System.out.println();
         System.out.println(L.size());
         System.out.println(L.getFirst());
-
+/**Test addLast(n),deleteFirst(),size() 和 getFirst() methods*/
         SLList A=new SLList();
         A.addLast(10);
         A.deleteFirst();
@@ -155,7 +175,7 @@ public class SLList {
         System.out.println(A.size());
         System.out.println(A.getFirst());
         System.out.println();
-
+/**Test array构造方法 和 addAdjacent() method*/
         int[] array= {1,1,2,4,8};
         SLList B=new SLList(array);
         B.printList();
@@ -165,13 +185,20 @@ public class SLList {
         B.printList();
         System.out.println();
         System.out.println();
-
+/**Test array构造方法 和 addTwoNumbers method*/
         int[] array1= {2,4,3,1};
         int[] array2= {5,6,7};
         SLList L1=new SLList(array1);
         SLList L2=new SLList(array2);
         SLList sum = addTwoNumbers(L1,L2);
         sum.printList();
+        System.out.println();
+        System.out.println();
+/**Test findFirst method*/
+        System.out.println(sum.findFirst(2));
+        System.out.println(L1.findFirst(1));
+        L1.printList();
+
 
 
 
