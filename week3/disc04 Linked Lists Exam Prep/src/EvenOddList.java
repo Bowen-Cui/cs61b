@@ -55,13 +55,13 @@ public class EvenOddList {
 
     public static void main(String[] args) {
         EvenOddList lst = new EvenOddList(0,null);
-        lst.rest = new EvenOddList(3,null);
-        lst.rest.rest = new EvenOddList(1,null);
-        lst.rest.rest.rest = new EvenOddList(4, null);
-        lst.rest.rest.rest.rest = new EvenOddList(2, null);
+        lst.rest = new EvenOddList(1,null);
+        lst.rest.rest = new EvenOddList(2,null);
+        lst.rest.rest.rest = new EvenOddList(3, null);
+        lst.rest.rest.rest.rest = new EvenOddList(4, null);
         lst.rest.rest.rest.rest.rest = new EvenOddList(5, null);
 
-        evenOdd(lst);
+        evenOdd2(lst);
         EvenOddList temp=lst;
         while(temp!=null){
             System.out.print(temp.first+" ");
