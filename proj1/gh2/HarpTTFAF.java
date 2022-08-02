@@ -12,20 +12,20 @@ import java.util.zip.GZIPInputStream;
  *
  * @author Eli Lipsitz
  */
-public class TTFAF {
+public class HarpTTFAF {
     public static void main(String[] args) {
         try {
             InputStream source = new ByteArrayInputStream(Base64.getDecoder().decode(TTFAF));
             source = new GZIPInputStream(source);
-            GuitarPlayer player = new GuitarPlayer(source);
+            HarpPlayer player = new HarpPlayer(source);
             player.play();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // You can also do this:
-        GuitarPlayer player = new GuitarPlayer(new java.io.File("path/to/music.mid"));
-        player.play();
+        // HarpPlayer player = new HarpPlayer(new java.io.File("path/to/music.mid"));
+       // player.play();
     }
 
     private static final String TTFAF =

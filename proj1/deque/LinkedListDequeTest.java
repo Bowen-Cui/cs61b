@@ -2,10 +2,51 @@ package deque;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import edu.princeton.cs.algs4.StdRandom;
 
 
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
+
+    @Test
+    public void randomizedTest(){
+        AListNoResizing<Integer> L = new AListNoResizing<>();
+        LinkedListDeque<Integer> K = new LinkedListDeque<>();
+        //ArrayDeque<Integer> A = new ArrayDeque<>();
+        int N = 500000;
+        for(int i=0; i<N; i++){
+            int operationNumber = StdRandom.uniform(0,4);
+            if (operationNumber == 0) {
+                // addLast
+                int randVal = StdRandom.uniform(0, 100);
+                L.addLast(randVal);
+                K.addLast(randVal);
+                System.out.println("addLast(" + randVal + ")");
+            } else if (operationNumber == 1) {
+                // size
+                int size1 = L.size();
+                int size2 = K.size();
+                System.out.println("Correct size: " + size1 + "  Broken size: "+ size2);
+                assertEquals(size1, size2);
+            } else if (operationNumber == 2) {
+                if(L.size() == 0){
+                    continue;
+                }
+                int last1 = L.getLast();
+                int last2 = K.getLast();
+                System.out.println("Correct getLast: " + last1 + "  Broken getLast: " + last2);
+                assertEquals(last1, last2);
+            } else if (operationNumber == 3) {
+                if(L.size() == 0){
+                    continue;
+                }
+                int remove1 = L.removeLast();
+                int remove2 = K.removeLast();
+                System.out.println("Correct removeLast: " + remove1 + "  Broken removeLast: "+ remove2);
+                assertEquals(remove1, remove2);
+            }
+        }
+    }
 
     @Test
     /** Adds a few things to the list, checking isEmpty() and size() are correct,
@@ -71,21 +112,23 @@ public class LinkedListDequeTest {
 
     @Test
     public void getTest(){
-        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>(0);
-        //lld1.addFirst(0);
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+        lld1.addFirst(0);
         lld1.addLast(1);
         lld1.addLast(2);
         lld1.addLast(3);
         lld1.addLast(4);
         lld1.addLast(5);
         lld1.addLast(6);
-        lld1.removeLast();
-        int i=lld1.get(2);
-        String errorMsg = " actual item: " + i ;
-        assertEquals(errorMsg, 2, i);
+        //lld1.removeLast();
+        lld1.printDeque();
+        int i=lld1.get(6);
+        String errorMsg1 = " actual item: " + i ;
+        assertEquals(errorMsg1, 6, i);
 
-        int x=lld1.getRecursive(3);
-        assertEquals(errorMsg, 3, x);
+        int x=lld1.getRecursive(2);
+        String errorMsg2 = " actual item: " + x ;
+        assertEquals(errorMsg2, 2, x);
     }
 
     @Test
