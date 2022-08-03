@@ -1,6 +1,8 @@
 package deque;
 
-public class LinkedListDeque<T> implements Deque<T>{
+import java.util.Iterator;
+
+public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
     private Node sentinel;
     private int size;
     private class Node {
@@ -132,14 +134,67 @@ public class LinkedListDeque<T> implements Deque<T>{
     }
 
     /**The Deque objects we’ll make are iterable (i.e. Iterable<T>) so we must provide this method to return an iterator.*/
-   // public Iterator<T> iterator(){
+    public Iterator<T> iterator(){
+        return new DequeIterator();
+    }
 
-   // }
+    private class DequeIterator<T> implements Iterator<T>{
+        private int index;
+        public DequeIterator(){
+            index = 0;
+        }
+        public boolean hasNext(){
+            return index<size;
+        }
+        public T next(){
+            T returnItem = (T) get(index);
+            index += 1;
+            return returnItem;
+        }
+    }
 
     /**Returns whether or not the parameter o is equal to the Deque. o is considered equal if it is a Deque and if it
      * contains the same contents (as goverened by the generic T’s equals method) in the same order.
      * (ADDED 2/12: You’ll need to use the instance of keywords for this. Read here for more information)*/
     public boolean equals(Object o){
-        return false;
+        try{
+            Deque x = (Deque) o;
+        }catch(Exception ClassCastException){
+            return false;
+        }
+        for(int i=0; i<size; i++){
+            if(get(i) != ((Deque<T>) o).get(i)){
+                return false;
+            }
+        }
+
+        return true;
     }
+    public static void main(String[] args) {
+        LinkedListDeque<Integer> a = new LinkedListDeque<>();
+        a.addLast(1);
+        a.addLast(2);
+        a.addLast(3);
+        a.addLast(4);
+        for(int i : a){
+            System.out.println(i);
+        }
+
+        ArrayDeque b = new ArrayDeque();
+        b.addLast(1);
+        b.addLast(2);
+        b.addLast(3);
+        b.addLast(4);
+        System.out.println(a.equals(b));
+        System.out.println(b.equals(a));
+
+        Object c= 10;
+        System.out.println(a.equals(c));
+
+        Iterator t = a.iterator();
+        while (t.hasNext()){
+            System.out.println(t.next());
+        }
+   }
+
 }

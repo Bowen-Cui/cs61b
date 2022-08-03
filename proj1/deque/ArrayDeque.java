@@ -1,6 +1,8 @@
 package deque;
 
-public class ArrayDeque<T> implements Deque<T> {
+import java.util.Iterator;
+
+public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
     private T[] array;
     private int size;
     private int nextFirst;
@@ -161,17 +163,44 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     /**The Deque objects we’ll make are iterable (i.e. Iterable<T>) so we must provide this method to return an iterator.*/
-    // public Iterator<T> iterator(){
-
-    // }
-    //private class DequeIterator implements Iterator<T> {
+     public Iterator<T> iterator(){
+         return new DequeIterator();
+     }
+     private class DequeIterator<T> implements Iterator<T> {
+         private int index;
+         public DequeIterator(){
+             index = 0;
+         }
+             @Override
+             public boolean hasNext() {
+                 return index<size;
+             }
+             @Override
+             public T next() {
+                 T returnItem = (T) array[index];
+                 index+=1;
+                 return returnItem;
+             }
+     }
 
 
         /**Returns whether or not the parameter o is equal to the Deque. o is considered equal if it is a Deque and if it
      * contains the same contents (as goverened by the generic T’s equals method) in the same order.
      * (ADDED 2/12: You’ll need to use the instance of keywords for this. Read here for more information)*/
     public boolean equals(Object o){
-        return false;
+        try {
+            Deque x = (Deque) o;
+            }
+        catch (Exception ClassCastException){
+            return false;
+        }
+        for(int i=0; i<size; i++){
+            if(array[i]!=((Deque<T>) o).get(i)){
+                return false;
+            }
+        }
+        return true;
     }
+
 }
 
