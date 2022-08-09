@@ -27,13 +27,13 @@ public class TimeDLList {
         AList<Integer> Ns = new AList<>();
         AList<Double> Times = new AList<>();
         AList<Integer> opCounts = new AList<>();
-        for(int i=1000; i<=128000; i*=2){
+        for (int i = 1000; i <= 128000; i *= 2) {
             LinkedListDeque<Integer> lst = new LinkedListDeque<>();
-            for(int n=0; n<i; n++){
+            for (int n = 0; n < i; n++) {
                 lst.addLast(1);
             }
             Stopwatch sw = new Stopwatch();
-            for(int n=0; n<10000; n++){
+            for (int n = 0; n < 10000; n++) {
                 lst.get(i);
             }
             double time = sw.elapsedTime();
@@ -42,5 +42,5 @@ public class TimeDLList {
             opCounts.addLast(10000);
         }
         printTimingTable(Ns, Times, opCounts);
-     }
+    }
 }

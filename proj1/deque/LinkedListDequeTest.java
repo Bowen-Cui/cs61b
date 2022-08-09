@@ -32,10 +32,10 @@ public class LinkedListDequeTest {
                 if(L.size() == 0){
                     continue;
                 }
-                int last1 = L.getLast();
+                /*int last1 = L.getLast();
                 int last2 = K.getLast();
                 System.out.println("Correct getLast: " + last1 + "  Broken getLast: " + last2);
-                assertEquals(last1, last2);
+                assertEquals(last1, last2);*/
             } else if (operationNumber == 3) {
                 if(L.size() == 0){
                     continue;

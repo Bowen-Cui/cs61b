@@ -27,10 +27,10 @@ public class TimeArrayDeque {
         AList<Integer> Ns = new AList<>();
         AList<Double> Times = new AList<>();
         AList<Integer> opCounts = new AList<>();
-        for(int i = 1000; i<=12800000; i*=2){
+        for (int i = 1000; i <= 12800000; i *= 2) {
             ArrayDeque<Integer> lst = new ArrayDeque<>();
             Stopwatch sw = new Stopwatch();
-            for(int n = 0; n<i; n++ ){
+            for (int n = 0; n < i; n++) {
                 lst.addLast(1);
             }
             double time = sw.elapsedTime();
