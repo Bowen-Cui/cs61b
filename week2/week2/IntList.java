@@ -32,8 +32,8 @@ public class IntList {
     }
 
     public void add(int n){
-        this.rest=new IntList(this.first,this.rest);
-        this.first=n;
+        rest=new IntList(first,rest);
+        first=n;
         //this.rest=new IntList(n,this.rest);
     }
     /**
