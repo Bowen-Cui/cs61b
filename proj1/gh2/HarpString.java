@@ -23,16 +23,16 @@ public class HarpString {
     public HarpString(double frequency) {
         int capacity = (int) Math.round(SR/frequency);
         buffer = new ArrayDeque<>();
-        for(int i=0; i<capacity; i+=1){
+        for (int i = 0; i < capacity; i += 1) {
             buffer.addLast( 0.0);
         }
-        System.out.println("frequency:"+frequency+"  capacity:"+capacity);
+        System.out.println("frequency:" + frequency  +"  capacity:" + capacity);
     }
 
 
     /* Pluck the guitar string by replacing the buffer with white noise. */
     public void pluck() {
-        for(int i=0; i< buffer.size(); i+=1){
+        for (int i = 0; i < buffer.size(); i += 1) {
              buffer.removeFirst();           //Dequeue from head
              buffer.addLast(Math.random() + 1);    //enqueue from tail
         }
@@ -49,14 +49,14 @@ public class HarpString {
         //if(random==0){
        //     buffer.addLast((a+b)/2*DECAY );
        // } else {
-            buffer.addLast((a+b)/2*DECAY );
+            buffer.addLast((a + b)/2 * DECAY );
         }
             //System.out.println(buffer.get(0));
    // }
 
     /* Return the double at the front of the buffer. */
     public double sample() {
-        if(buffer.isEmpty()){
+        if (buffer.isEmpty()) {
             return 0;
         }
         return buffer.get(0);
