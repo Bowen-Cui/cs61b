@@ -1,4 +1,5 @@
 package gh2;
+
 import edu.princeton.cs.algs4.StdAudio;
 import edu.princeton.cs.algs4.StdDraw;
 
@@ -31,7 +32,7 @@ public class GuitarHero {
         }
 
         while (true) {
-             //check if the user has typed a key; if so, process it
+            //check if the user has typed a key; if so, process it
   /*          int random = StdRandom.uniform(0,KEYNUM);
 
             Notes[random].pluck();

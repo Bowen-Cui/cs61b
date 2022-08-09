@@ -8,9 +8,11 @@ import deque.Deque;
 
 //Note: This file will not compile until you complete the Deque implementations
 public class GuitarString {
-    /** Constants. Do not change. In case you're curious, the keyword final
+    /**
+     * Constants. Do not change. In case you're curious, the keyword final
      * means the values cannot be changed at runtime. We'll discuss this and
-     * other topics in lecture on Friday. */
+     * other topics in lecture on Friday.
+     */
     private static final int SR = 44100;      // Sampling Rate
     private static final double DECAY = .996; // energy decay factor
 
@@ -35,13 +37,13 @@ public class GuitarString {
     /* Pluck the guitar string by replacing the buffer with white noise. */
     public void pluck() {
         /** Dequeue everything in buffer, and replace with random numbers
-        //       between -0.5 and 0.5. You can get such a number by using:
-        //       double r = Math.random() - 0.5;
-        //
-        //       Make sure that your random numbers are different from each
-        //       other. This does not mean that you need to check that the numbers
-        //       are different from each other. It means you should repeatedly call
-        //       Math.random() - 0.5 to generate new random numbers for each array index.*/
+         //       between -0.5 and 0.5. You can get such a number by using:
+         //       double r = Math.random() - 0.5;
+         //
+         //       Make sure that your random numbers are different from each
+         //       other. This does not mean that you need to check that the numbers
+         //       are different from each other. It means you should repeatedly call
+         //       Math.random() - 0.5 to generate new random numbers for each array index.*/
         for (int i = 0; i < buffer.size(); i += 1) {
             buffer.removeFirst();           //Dequeue from head
             buffer.addLast(Math.random() - 0.5);    //enqueue from tail
@@ -53,8 +55,8 @@ public class GuitarString {
      */
     public void tic() {
         /** Dequeue the front sample and enqueue a new sample that is
-        //       the average of the two multiplied by the DECAY factor.
-        //       **Do not call StdAudio.play().**/
+         //       the average of the two multiplied by the DECAY factor.
+         //       **Do not call StdAudio.play().**/
         double a = buffer.removeFirst();
         double b = buffer.get(0);
         buffer.addLast((a + b) / 2 * DECAY);

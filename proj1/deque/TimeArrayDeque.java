@@ -1,4 +1,5 @@
 package deque;
+
 import edu.princeton.cs.algs4.Stopwatch;
 
 /**
@@ -18,7 +19,9 @@ public class TimeArrayDeque {
         }
     }
 
-    public static void main(String[] args) { timeAListConstruction(); }
+    public static void main(String[] args) {
+        timeAListConstruction();
+    }
 
 
     public static void timeAListConstruction() {
