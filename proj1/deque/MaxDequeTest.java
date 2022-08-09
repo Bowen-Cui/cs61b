@@ -12,7 +12,7 @@ public class MaxDequeTest {
         Dog d = new Dog("d", 1);
 
         Comparator<Dog> nc = Dog.getNameComparator();
-        System.out.println(nc.compare(a,b));
+        System.out.println(nc.compare(a, b));
 
         MaxArrayDeque<Dog> mad = new MaxArrayDeque<>(Dog.getNameComparator());
         mad.addFirst(a);
@@ -25,7 +25,7 @@ public class MaxDequeTest {
         MaxArrayDeque<Integer> mad2 = new MaxArrayDeque<>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
-                return o1-o2;
+                return o1 - o2;
             }
         });
         mad2.addLast(1);

@@ -2,11 +2,11 @@ package deque;
 
 import java.util.Comparator;
 
-public class Dog implements Comparable<Dog>{
+public class Dog implements Comparable<Dog> {
     private String name;
     private int size;
 
-    public Dog(String name, int size){
+    public Dog(String name, int size) {
         this.name = name;
         this.size = size;
     }
@@ -21,7 +21,7 @@ public class Dog implements Comparable<Dog>{
 
 
     public int compareTo(Dog o) {
-        return this.size-o.size;
+        return this.size - o.size;
     }
 
     private static class NameComparator implements Comparator<Dog> {
@@ -36,7 +36,7 @@ public class Dog implements Comparable<Dog>{
 
         @Override
         public int compare(Dog o1, Dog o2) {
-            return o1.size-o2.size;
+            return o1.size - o2.size;
         }
     }
 
