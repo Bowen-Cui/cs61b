@@ -1,7 +1,5 @@
 package deque;
 
-import com.google.common.hash.HashingOutputStream;
-
 import java.util.Comparator;
 
 public class MaxDequeTest {

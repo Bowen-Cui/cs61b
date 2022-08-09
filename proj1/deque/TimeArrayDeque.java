@@ -5,11 +5,12 @@ import edu.princeton.cs.algs4.Stopwatch;
  * Created by hug.
  */
 public class TimeArrayDeque {
-    private static void printTimingTable(AList<Integer> Ns, AList<Double> times, AList<Integer> opCounts) {
+    private static void printTimingTable(AList<Integer> ns,
+                                         AList<Double> times, AList<Integer> opCounts) {
         System.out.printf("%12s %12s %12s %12s\n", "N", "time (s)", "# ops", "microsec/op");
         System.out.printf("------------------------------------------------------------\n");
-        for (int i = 0; i < Ns.size(); i += 1) {
-            int N = Ns.get(i);
+        for (int i = 0; i < ns.size(); i += 1) {
+            int N = ns.get(i);
             double time = times.get(i);
             int opCount = opCounts.get(i);
             double timePerOp = time / opCount * 1e6;
@@ -17,15 +18,13 @@ public class TimeArrayDeque {
         }
     }
 
-    public static void main(String[] args) {
-        timeAListConstruction();
-    }
+    public static void main(String[] args) { timeAListConstruction(); }
 
 
     public static void timeAListConstruction() {
-        // TODO: YOUR CODE HERE
-        AList<Integer> Ns = new AList<>();
-        AList<Double> Times = new AList<>();
+        //  YOUR CODE HERE
+        AList<Integer> ns = new AList<>();
+        AList<Double> times = new AList<>();
         AList<Integer> opCounts = new AList<>();
         for (int i = 1000; i <= 12800000; i *= 2) {
             ArrayDeque<Integer> lst = new ArrayDeque<>();
@@ -34,10 +33,10 @@ public class TimeArrayDeque {
                 lst.addLast(1);
             }
             double time = sw.elapsedTime();
-            Ns.addLast(i);
-            Times.addLast(time);
+            ns.addLast(i);
+            times.addLast(time);
             opCounts.addLast(i);
         }
-        printTimingTable(Ns, Times, opCounts);
+        printTimingTable(ns, times, opCounts);
     }
 }

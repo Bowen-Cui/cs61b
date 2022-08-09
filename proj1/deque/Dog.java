@@ -11,14 +11,12 @@ public class Dog implements Comparable<Dog> {
         this.size = size;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
-    public int getSize(){
+    public int getSize() {
         return size;
     }
-
-
 
     public int compareTo(Dog o) {
         return this.size - o.size;
@@ -40,10 +38,10 @@ public class Dog implements Comparable<Dog> {
         }
     }
 
-    public static Comparator getNameComparator(){
+    public static Comparator getNameComparator() {
         return new NameComparator();
     }
-    public static Comparator getSizeComparator(){
+    public static Comparator getSizeComparator() {
         return new SizeComparator();
     }
 }

@@ -15,7 +15,7 @@ public class GuitarString {
     private static final double DECAY = .996; // energy decay factor
 
     /* Buffer for storing sound data. */
-     private Deque<Double> buffer;
+    private Deque<Double> buffer;
 
     /* Create a guitar string of the given frequency.  */
     public GuitarString(double frequency) {
@@ -26,10 +26,10 @@ public class GuitarString {
          */
         int capacity = (int) Math.round(SR / frequency);
         buffer = new ArrayDeque<>();
-        for (int i = 0; i  <capacity; i += 1) {
-            buffer.addLast( 0.0);
+        for (int i = 0; i < capacity; i += 1) {
+            buffer.addLast(0.0);
         }
-        System.out.println("frequency:" + frequency+"  capacity:" + capacity);
+        System.out.println("frequency:" + frequency + "  capacity:" + capacity);
     }
 
     /* Pluck the guitar string by replacing the buffer with white noise. */
@@ -43,8 +43,8 @@ public class GuitarString {
         //       are different from each other. It means you should repeatedly call
         //       Math.random() - 0.5 to generate new random numbers for each array index.*/
         for (int i = 0; i < buffer.size(); i += 1) {
-             buffer.removeFirst();           //Dequeue from head
-             buffer.addLast(Math.random() - 0.5);    //enqueue from tail
+            buffer.removeFirst();           //Dequeue from head
+            buffer.addLast(Math.random() - 0.5);    //enqueue from tail
         }
     }
 

@@ -43,7 +43,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     @Override
     /**Adds an item of type T to the front of the deque. You can assume that item is never null.*/
     public void addFirst(T item) {
-        if (size  ==array.length) {
+        if (size  == array.length) {
             reSizing(2);
         }
         array[nextFirst] = item;
@@ -52,7 +52,8 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     }
     /**A helper method that get the nextLast*/
     private int getNextLast() {
-        if (nextLast == array.length - 1) {  //【-----123】的情况，nextlast放在index=0   【12345678】的情况，nextlast
+        if (nextLast == array.length - 1) {
+            //【-----123】的情况，nextlast放在index=0   【12345678】的情况，nextlast
             return 0;
         } else {
             return nextLast + 1;
@@ -169,9 +170,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     }
     private class DequeIterator<T> implements Iterator<T> {
         private int index;
-        public DequeIterator(){
-             index = 0;
-         }
+        DequeIterator() { index = 0; }
         @Override
         public boolean hasNext() {
                  return index < size;
@@ -202,7 +201,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             return false;
         }
         for (int i = 0; i < size; i++){
-            if (get(i) != ((Deque<T>) o).get(i)) {
+            if (!get(i).equals(((Deque<T>) o).get(i))) {
                 return false;
             }
         }
