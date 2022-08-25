@@ -3,6 +3,7 @@ package discussion;
 public class Dog extends Animal{
 
     private  int size;
+    public Dog() {}
 
     public Dog(String name, int size){
         this.size = size;

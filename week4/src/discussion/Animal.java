@@ -9,8 +9,9 @@ public class Animal {
         this.name = name;
         noise = "Ahh";
     }
-
-    public void speak(){
-        System.out.println("lalala");
+    public Animal watch(Animal a){
+        System.out.println("animal watch animal");
+        return new Animal();
     }
+
 }
