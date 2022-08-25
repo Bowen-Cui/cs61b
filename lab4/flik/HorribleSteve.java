@@ -9,6 +9,6 @@ public class HorribleSteve {
                         String.format("i:%d not same as j:%d ??", i, j));
             }
         }
-        System.out.println("i is " + i);
+        System.out.println("i is :" + i);
     }
 }
